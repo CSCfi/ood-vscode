@@ -11,11 +11,11 @@ mv cpptools-linux.vsix  ms-vscode.cpptools-linux.vsix
 # ~/.config/code-server/config.yaml contains the password when started with no arguments
 # forward with ssh -L 8080:localhost:8080 puhti-login3.csc.fi
 
-#Patch in 
+#Patch defaults in
 #ms-vscode.cpptools-1.3.1/dist/main.js
 # applyDefaultConfigurationValues
-# if (isUnset(settings.defaultIncludePath))                                                                
+#                                                                 
 #    configuration.includePath = ["${env:CPATH}","${env:_EXTRA_INCLUDES}"].concat(configuration.includePath);
 #    configuration.compilerPath = "${env:_CXX_PATH}";                                                        
-# }                                                                                                         
+#                                                                                                          
 
