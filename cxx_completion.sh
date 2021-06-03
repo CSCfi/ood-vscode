@@ -16,6 +16,7 @@ mv cpptools-linux.vsix  ms-vscode.cpptools-linux.vsix
 # applyDefaultConfigurationValues
 #                                                                 
 #    configuration.includePath = ["${env:CPATH}","${env:_EXTRA_INCLUDES}"].concat(configuration.includePath);
+#    configuration.compilerPath = "${env:_CXX_PATH}";
 #    configuration.compilerPath = "${env:_CXX_PATH}";                                                        
 #                                                                                                          
 
