@@ -14,10 +14,13 @@ echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"' >
 echo 'exec $DIR/../lib/code-server/bin/code-server "$@"' >> bin/code-server
 rm code-server-3.9.3-amd64.rpm
 
-## Note! 
-# lib/code-server/out/node/http.js
-#  needs to be patched to work with ood
-# Change one relative redirect (around line 97) 
-#    if (redirectPath == "./") {
-#        redirectPath = "/"
-#    }
+patch lib/code-server/out/node/http.js patches/redirect.patch
+
+wget https://github.com/microsoft/vscode-cpptools/releases/download/1.3.1/cpptools-linux.vsix .
+mv cpptools-linux.vsix  ms-vscode.cpptools-linux.vsix
+
+./bin/code-server --extensions-dir=$PWD/extensions --verbose --install-extension  ms-vscode.cpptools-linux.vsix
+rm extensions/ms-vscode.cpptools-1.3.1/install.lock
+dos2unix extensions/ms-vscode.cpptools-1.3.1/dist/main.js
+patch extensions/ms-vscode.cpptools-1.3.1/dist/main.js patches/cxx.patch
+
