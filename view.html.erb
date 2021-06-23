@@ -1,0 +1,27 @@
+<%
+    require 'digest'
+
+form_id = Digest::SHA1.hexdigest("--" + host.to_s + "--" + port.to_s + "--")
+cookieValue = Digest::SHA256.hexdigest(password)
+%>
+
+<script type="text/javascript">
+  function setCookie(name, value, path) {
+      console.log(name, value, path);
+      let date = new Date();
+      date.setTime(date.getTime()+(7*24*60*60*1000));
+      let expires = "expires=" + date.toUTCString();
+      let cookie = `${name}=${value};${expires};path=${path};secure`;
+      console.log(cookie);
+      document.cookie = cookie;
+    }
+  var cName = "key";
+  var cValue = "<%= cookieValue %>";
+  var cPath = "/rnode/" + "<%= host %>" + "/" + "<%= port %>/";
+</script>
+
+<form id="<%= form_id %>" action="/rnode/<%= host %>/<%= port %>/" method="GET" target="_blank" onsubmit="setCookie(cName, cValue, cPath)">
+  <button class="btn btn-primary" type="submit">
+    <i class="fa fa-eye"></i> Connect to Visual studio code
+  </button>
+</form>

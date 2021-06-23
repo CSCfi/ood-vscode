@@ -1,0 +1,28 @@
+<% require '/appl/opt/ood_util/attributes/csc_slurm_project' -%>
+<% require '/appl/opt/ood_util/attributes/csc_slurm_partition' -%>
+# Batch Connect app configuration file
+#
+# @note Used to define the submitted cluster, title, description, and
+#   hard-coded/user-defined attributes that make up this Batch Connect app.
+---
+cluster: "puhti"
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  cores: 1
+  time:
+      value: "4:00:00"
+  compiler:
+      widget: select
+      options:
+          - "intel/19.0.4"
+          - "gcc/9.1.0"
+form:
+  - cores
+  - csc_slurm_project
+  - csc_slurm_partition
+  - time
+  - compiler 
+  - modules
+  - bc_email_on_started

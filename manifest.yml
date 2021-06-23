@@ -1,0 +1,7 @@
+---
+name: Visual studio code
+category: Interactive Apps
+subcategory: Editors
+role: batch_connect
+description: |
+  This app will launch Visual studio code.
