@@ -1,5 +1,0 @@
-97a98,101
->     if (redirectPath == "./") {
->     redirectPath = "/"
->     }
-> 
