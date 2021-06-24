@@ -1,8 +1,6 @@
 <%
-    require 'digest'
-
-form_id = Digest::SHA1.hexdigest("--" + host.to_s + "--" + port.to_s + "--")
-cookieValue = Digest::SHA256.hexdigest(password)
+  require 'digest'
+  cookieValue = Digest::SHA256.hexdigest(password)
 %>
 
 <script type="text/javascript">
@@ -15,12 +13,9 @@ cookieValue = Digest::SHA256.hexdigest(password)
       console.log(cookie);
       document.cookie = cookie;
     }
-  var cName = "key";
-  var cValue = "<%= cookieValue %>";
-  var cPath = "/rnode/" + "<%= host %>" + "/" + "<%= port %>/";
 </script>
 
-<form id="<%= form_id %>" action="/rnode/<%= host %>/<%= port %>/" method="GET" target="_blank" onsubmit="setCookie(cName, cValue, cPath)">
+<form action="/rnode/<%= host %>/<%= port %>/" method="GET" target="_blank" onsubmit="setCookie('key', '<%= cookieValue %>', '/rnode/' + '<%= host %>' + '/' + '<%= port %>/')">
   <button class="btn btn-primary" type="submit">
     <i class="fa fa-eye"></i> Connect to Visual studio code
   </button>
