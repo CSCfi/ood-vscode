@@ -50,9 +50,21 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
     "workbench.colorTheme": "Quiet Light",
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
-    "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"],
+    "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"].
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python: Current File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "python": "python3"
+            }
+        ]
+    }
 }
-
 ' > $HOME/.local/share/csc-vscode/User/settings.json
 # setting compiler path to icpc breaks some parts
 # "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
@@ -61,5 +73,8 @@ else
 sed -i 's/"python.pythonPath":\s*".*"/"python.pythonPath": "${env:_PYTHON_EXE}"/'  $HOME/.local/share/csc-vscode/User/settings.json
 
 fi
+
+export SING_FLAGS="$SING_FLAGS -B /appl/opt/ood_util:/appl/opt/ood_util"
+
 set -x
 /appl/opt/ood_util/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --extra-builtin-extensions-dir="/appl/opt/ood_util/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" 
