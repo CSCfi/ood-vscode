@@ -14,6 +14,7 @@ batch_connect:
 script:
   native:
       - '-c'
-      - '<%= cores  %>'
+      - '<%= csc_cores  %>'
       - '-t'
-      - '<%= time %>'
+      - '<%= csc_time %>'
+      - '--mem=<%= csc_memory %>G'
