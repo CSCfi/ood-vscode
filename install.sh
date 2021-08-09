@@ -4,6 +4,7 @@
 set -e
 set +x
 
+rm -rf bin extensions lib  temp_user_data  usr
 curl -#fL -o code-server-3.9.3-amd64.rpm -C - https://github.com/cdr/code-server/releases/download/v3.9.3/code-server-3.9.3-amd64.rpm
 rpm2cpio code-server-3.9.3-amd64.rpm | cpio -idmv  --no-absolute-filenames
 
