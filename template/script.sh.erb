@@ -26,7 +26,8 @@ module load <%= context.modules %>
 
 export _CXX_PATH=$(which $CXX)
 if [[ "$CXX" == "icpc"  ]];then
-export _EXTRA_INCLUDES=$(readlink -f $(dirname $_CXX_PATH)/../../compiler/include)
+  export _EXTRA_INCLUDES=$(readlink -f $(dirname $_CXX_PATH)/../../compiler/include)
+  export CPATH="$CPATH:/appl/spack/install-tree/gcc-4.8.5/gcc-8.3.0-qzmzn5/include/c++/8.3.0/x86_64-pc-linux-gnu/"
 fi
 module list
 
@@ -51,6 +52,7 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
     "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"],
+    "C_Cpp.default.compilerPath": "${env:_CXX_PATH}",
     "launch": {
         "version": "0.2.0",
         "configurations": [
@@ -74,7 +76,7 @@ sed -i 's/"python.pythonPath":\s*".*"/"python.pythonPath": "${env:_PYTHON_EXE}"/
 
 fi
 
-export SING_FLAGS="$SING_FLAGS -B /appl/opt/ood_util:/appl/opt/ood_util"
+export SING_FLAGS="$SING_FLAGS -B /appl/opt/ood/$SLURM_OOD_ENV:/appl/opt/ood/$SLURM_OOD_ENV"
 
 set -x
-/appl/opt/ood_util/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --extra-builtin-extensions-dir="/appl/opt/ood_util/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" 
+/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --extra-builtin-extensions-dir="/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" 
