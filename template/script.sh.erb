@@ -52,20 +52,7 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
     "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"],
-    "C_Cpp.default.compilerPath": "${env:_CXX_PATH}",
-    "launch": {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "name": "Python: Current File",
-                "type": "python",
-                "request": "launch",
-                "program": "${file}",
-                "console": "integratedTerminal",
-                "python": "python3"
-            }
-        ]
-    }
+    "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
 }
 ' > $HOME/.local/share/csc-vscode/User/settings.json
 # setting compiler path to icpc breaks some parts
