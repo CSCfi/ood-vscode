@@ -30,6 +30,7 @@ rm -r temp_user_data
 # deps should be installed already, just need to chmod and add to package.json activationEvents
 # see https://github.com/microsoft/vscode-cpptools/blob/ef52c25aa6b12f2aa810388ba45177b75468443b/Extension/src/main.ts#L206
 chmod +x extensions/ms-vscode.cpptools-1.5.1/debugAdapters/OpenDebugAD7
+chmod +x extensions/ms-vscode.cpptools-1.5.1/debugAdapters/mono.linux-x86_64
 chmod +x extensions/ms-vscode.cpptools-1.5.1/bin/cpptools
 chmod +x extensions/ms-vscode.cpptools-1.5.1/bin/cpptools-srv
 
