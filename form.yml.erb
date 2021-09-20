@@ -9,6 +9,12 @@ cluster: "puhti"
 # Define attribute values that aren't meant to be modified by the user within
 # the Dashboard form
 attributes:
+  csc_slurm_partition:
+    value: interactive
+    select:
+      - "interactive"
+      - "small"
+      - "test"
   csc_memory:
     value: 2
   compiler:
