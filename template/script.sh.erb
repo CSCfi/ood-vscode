@@ -65,5 +65,14 @@ fi
 
 export SING_FLAGS="$SING_FLAGS -B /appl/opt/ood/$SLURM_OOD_ENV:/appl/opt/ood/$SLURM_OOD_ENV"
 
+PY_INT_REF=$(dirname $(python -c 'import sys;print(sys.executable)'))
+PY_EXT_REF=$(dirname $(which python ))
+if [[ ! $PY_INT_REF == $PY_EXT_REF  ]];then
+    mkdir -p $TMPDIR/.oodvscode_hack 
+    ln -fs $PY_INT_REF/python $TMPDIR/.oodvscode_hack/python 
+    ln -fs $PY_INT_REF/python3 $TMPDIR/.oodvscode_hack/python3
+    export SINGULARITY_BIND="$TMPDIR/.oodvscode_hack/:$PY_EXT_REF"
+fi
+
 set -x
 /appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --extra-builtin-extensions-dir="/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" 
