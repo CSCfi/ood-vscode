@@ -1,6 +1,8 @@
 <%= CSCAppSessionInfo.log_link(self) %>
 <%= CSCAppSessionInfo.job_info(self) %>
 <%= CSCAppSessionInfo.exit_reason(self) %>
+
+<%= CSCAppSessionInfo.seff_stats(self) %>
 <% unless cache_completed %>
   <div class="alert alert-warning">All VSCode tabs and windows from previous app sessions must be closed before connecting.</div>
 <% end %>
