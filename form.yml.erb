@@ -28,6 +28,9 @@ attributes:
       help: | 
           Space separated list of modules to load, e.g
           hpcx-mpi geoconda
+  csc_reset_cache:
+    app: "sys/ood-vscode"
+
 form:
   - csc_slurm_project
   - csc_slurm_partition
@@ -40,4 +43,5 @@ form:
   - compiler 
   - modules
   - bc_email_on_started
+  - csc_reset_cache
   - csc_slurm_limits
