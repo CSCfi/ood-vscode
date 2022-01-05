@@ -2,6 +2,8 @@
 
 Launches VSCode as an interactive app. Uses [code-server](https://github.com/cdr/code-server).
 
+The app requires [ood-util](https://github.com/CSCfi/ood-util) and [ood-initializers](https://github.com/CSCfi/ood-initializers) to work.
+
 ## Installation
 The app uses a shared code-server located in `/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode`.
 To (re)install the code-server copy `install.sh` to `/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode` and run it.
