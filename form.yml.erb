@@ -17,6 +17,13 @@ attributes:
       - "test"
       - "fmi"
       - "fmitest"
+  csc_slurm_reservation:
+    partitions:
+      - "interactive"
+      - "small"
+      - "test"
+      - "fmi"
+      - "fmitest"
   csc_memory:
     value: 2
   compiler:
@@ -32,6 +39,7 @@ attributes:
     app: "sys/ood-vscode"
 
 form:
+  - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition
   - csc_header_resources
