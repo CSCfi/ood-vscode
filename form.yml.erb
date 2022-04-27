@@ -37,8 +37,12 @@ attributes:
           hpcx-mpi geoconda
   csc_reset_cache:
     app: "sys/ood-vscode"
+  csc_extra_desc:
+    desc: |
+      <a href="https://docs.csc.fi/computing/webinterface/vscode/" target="_blank">Documentation</a>
 
 form:
+  - csc_extra_desc
   - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition
