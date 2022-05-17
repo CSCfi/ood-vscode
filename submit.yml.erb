@@ -18,4 +18,6 @@ script:
       - '-t'
       - '<%= csc_time %>'
       - '--mem=<%= csc_memory %>G'
-      - '--gres=nvme:<%= csc_nvme.blank? ? 0 : csc_nvme %>'
+      <% if csc_nvme.to_i > 0 %>
+      - '--gres=nvme:<%= csc_nvme.to_i -%>'
+      <% end %>
