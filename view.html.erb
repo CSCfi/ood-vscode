@@ -15,7 +15,7 @@
     }
 </script>
 
-<form action="/rnode/<%= host %>/<%= port %>/" method="GET" target="_blank" onsubmit="setCookie('key', '<%= cookieValue %>', '/rnode/' + '<%= host %>' + '/' + '<%= port %>/')">
+<form action="/rnode/<%= host %>/<%= port %>/" method="GET" target="_blank" onsubmit="setCookie('code-server-session', '<%= cookieValue %>', '/rnode/' + '<%= host %>' + '/' + '<%= port %>/')">
   <button class="btn btn-primary" type="submit">
     <i class="fa fa-eye"></i> Connect to Visual studio code
   </button>
