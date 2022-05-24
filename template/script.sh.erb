@@ -24,6 +24,9 @@ module load <%= context.modules %>
 # List loaded modules
 <%- end -%>
 
+export SERVICE_URL=https://open-vsx.org/vscode/gallery
+export ITEM_URL=https://open-vsx.org/vscode/item
+
 export _CXX_PATH=$(which $CXX)
 if [[ "$CXX" == "icpc"  ]];then
   export _EXTRA_INCLUDES=$(readlink -f $(dirname $_CXX_PATH)/../../compiler/include)

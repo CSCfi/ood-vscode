@@ -5,15 +5,20 @@ set -e
 set +x
 
 rm -rf bin extensions lib  temp_user_data  usr
-curl -#fL -o code-server-3.9.3-amd64.rpm -C - https://github.com/cdr/code-server/releases/download/v3.9.3/code-server-3.9.3-amd64.rpm
-rpm2cpio code-server-3.9.3-amd64.rpm | cpio -idmv  --no-absolute-filenames
+
+CODE_VERSION="3.12.0"
+curl -#fL -o code-server-${CODE_VERSION}-amd64.rpm -C - https://github.com/coder/code-server/releases/download/v${CODE_VERSION}/code-server-${CODE_VERSION}-amd64.rpm
+rpm2cpio code-server-${CODE_VERSION}-amd64.rpm | cpio -idmv  --no-absolute-filenames
 
 mv usr/* .
 rm -r usr
 echo '#!/usr/bin/env sh' > bin/code-server
 echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"' >> bin/code-server
 echo 'exec $DIR/../lib/code-server/bin/code-server "$@"' >> bin/code-server
-rm code-server-3.9.3-amd64.rpm
+rm code-server-${CODE_VERSION}-amd64.rpm
+
+export SERVICE_URL=https://open-vsx.org/vscode/gallery
+export ITEM_URL=https://open-vsx.org/vscode/item
 
 # Fetch Jupyter and Python extensions from the store
 ./bin/code-server --extensions-dir="$PWD/extensions" --user-data-dir="$PWD/temp_user_data" --verbose --install-extension ms-toolsai.jupyter
