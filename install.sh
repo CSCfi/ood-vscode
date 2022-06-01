@@ -6,7 +6,7 @@ set +x
 
 rm -rf bin extensions lib  temp_user_data  usr
 
-CODE_VERSION="3.12.0"
+CODE_VERSION="4.4.0"
 curl -#fL -o code-server-${CODE_VERSION}-amd64.rpm -C - https://github.com/coder/code-server/releases/download/v${CODE_VERSION}/code-server-${CODE_VERSION}-amd64.rpm
 rpm2cpio code-server-${CODE_VERSION}-amd64.rpm | cpio -idmv  --no-absolute-filenames
 
@@ -17,8 +17,9 @@ echo 'DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"' >
 echo 'exec $DIR/../lib/code-server/bin/code-server "$@"' >> bin/code-server
 rm code-server-${CODE_VERSION}-amd64.rpm
 
-export SERVICE_URL=https://open-vsx.org/vscode/gallery
-export ITEM_URL=https://open-vsx.org/vscode/item
+# Make VSCode accept any capitalization on upgrade header (required by Apache mod_proxy_wstunnel)
+file_to_patch="lib/code-server/lib/vscode/out/vs/server/node/server.main.js"
+sed -i 's#headers\.upgrade!=="websocket"#headers.upgrade.toLowerCase()!=="websocket"#g' "$file_to_patch"
 
 # Fetch Jupyter and Python extensions from the store
 ./bin/code-server --extensions-dir="$PWD/extensions" --user-data-dir="$PWD/temp_user_data" --verbose --install-extension ms-toolsai.jupyter
@@ -44,3 +45,4 @@ content='"onLanguage:c","onLanguage:cpp","onLanguage:cuda-cpp","onCommand:extens
 
 sed -i -z "s|activationEvents\": \[\s\+\"\*\"|activationEvents\": \[$content|" extensions/ms-vscode.cpptools-1.5.1/package.json
 
+chmod +rx extensions
