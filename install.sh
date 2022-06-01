@@ -45,3 +45,4 @@ content='"onLanguage:c","onLanguage:cpp","onLanguage:cuda-cpp","onCommand:extens
 
 sed -i -z "s|activationEvents\": \[\s\+\"\*\"|activationEvents\": \[$content|" extensions/ms-vscode.cpptools-1.5.1/package.json
 
+chmod +rx extensions
