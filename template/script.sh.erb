@@ -75,4 +75,4 @@ if [[ ! $PY_INT_REF == $PY_EXT_REF  ]];then
 fi
 
 set -x
-/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --builtin-extensions-dir="/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}"
+/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --builtin-extensions-dir="/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" --ignore-last-opened
