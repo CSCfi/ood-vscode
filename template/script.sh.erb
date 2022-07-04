@@ -24,9 +24,6 @@ module load <%= context.modules %>
 # List loaded modules
 <%- end -%>
 
-export SERVICE_URL=https://open-vsx.org/vscode/gallery
-export ITEM_URL=https://open-vsx.org/vscode/item
-
 export _CXX_PATH=$(which $CXX)
 if [[ "$CXX" == "icpc"  ]];then
   export _EXTRA_INCLUDES=$(readlink -f $(dirname $_CXX_PATH)/../../compiler/include)
@@ -78,4 +75,4 @@ if [[ ! $PY_INT_REF == $PY_EXT_REF  ]];then
 fi
 
 set -x
-/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --extra-builtin-extensions-dir="/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" 
+/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" --ignore-last-opened
