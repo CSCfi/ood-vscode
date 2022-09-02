@@ -6,7 +6,7 @@ set +x
 
 rm -rf bin extensions lib  temp_user_data  usr
 
-CODE_VERSION="4.6.0"
+CODE_VERSION="4.6.1"
 curl -#fL -o code-server-${CODE_VERSION}-amd64.rpm -C - https://github.com/coder/code-server/releases/download/v${CODE_VERSION}/code-server-${CODE_VERSION}-amd64.rpm
 rpm2cpio code-server-${CODE_VERSION}-amd64.rpm | cpio -idmv  --no-absolute-filenames
 
