@@ -16,7 +16,6 @@ attributes:
       - "test"
       - "fmi"
       - "fmitest"
-      - "rhel8-cpu"
   csc_slurm_reservation:
     partitions:
       - "interactive"
@@ -34,7 +33,7 @@ attributes:
   modules:
       help: | 
           Space separated list of modules to load, e.g
-          hpcx-mpi geoconda
+          openmpi geoconda
   csc_reset_cache:
     app: "sys/ood-vscode"
   csc_extra_desc:
