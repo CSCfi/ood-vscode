@@ -25,6 +25,12 @@ attributes:
       - "fmitest"
   csc_memory:
     value: 2
+  code_version:
+    widget: select
+    options:
+      - 1.76.1
+      - 1.70.2
+    value: 1.76.1
   compiler:
       widget: select
       options:
@@ -51,6 +57,7 @@ form:
   - csc_nvme
   - csc_time
   - csc_header_settings
+  - code_version
   - compiler 
   - modules
   - bc_email_on_started
