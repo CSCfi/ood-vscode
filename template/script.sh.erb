@@ -12,7 +12,7 @@ cd "${HOME}"
 module purge
 module load git
 module load <%= context.compiler %>
-module load hpcx-mpi
+module load openmpi
 
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
