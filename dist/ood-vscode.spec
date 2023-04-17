@@ -32,10 +32,6 @@ Open on Demand vscode
 %__install -m 0644 manifest.yml *.erb icon.png README.md LICENSE %{buildroot}%{_localstatedir}%{app_path}%{name}/
 echo %{version}-%{release} > %{buildroot}%{_localstatedir}%{app_path}%{name}/VERSION
 
-%post
-# TODO: include form_validated.js globally to avoid this?
-ln -fns "$(rpm -qil ood-util | grep form_validated.js)" %{_localstatedir}%{app_path}%{name}/form.js
-
 %files
 
 %{_localstatedir}%{app_path}%{name}
