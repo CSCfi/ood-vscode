@@ -12,7 +12,7 @@ cd "${HOME}"
 module purge
 module load git
 module load <%= context.compiler %>
-module load hpcx-mpi
+module load openmpi
 
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
@@ -74,5 +74,7 @@ if [[ ! $PY_INT_REF == $PY_EXT_REF  ]];then
     export SINGULARITY_BIND="$TMPDIR/.oodvscode_hack/:$PY_EXT_REF"
 fi
 
+export CODE_EXE=/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode-code-server/<%= context.code_version %>/bin/code-server 
+echo "USING CODE-SERVER: $CODE_EXE"
 set -x
-/appl/opt/ood/$SLURM_OOD_ENV/soft/vscode/bin/code-server --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" --ignore-last-opened
+$CODE_EXE --extensions-dir="$HOME/.local/share/csc-vscode/extensions" --disable-telemetry --user-data-dir="$HOME/.local/share/csc-vscode" --disable-update-check --verbose --config "${CONFIG_FILE}" --ignore-last-opened
