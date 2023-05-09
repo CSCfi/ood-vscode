@@ -39,3 +39,6 @@ chmod +x "$EXT_DIR/ms-vscode.cpptools-${CPPTOOLS_VERSION}/bin/cpptools-srv"
 chmod +x "$EXT_DIR/ms-vscode.cpptools-${CPPTOOLS_VERSION}/bin/cpptools-wordexp"
 chmod +x "$EXT_DIR/ms-vscode.cpptools-${CPPTOOLS_VERSION}/LLVM/bin/clang-format"
 chmod +x "$EXT_DIR/ms-vscode.cpptools-${CPPTOOLS_VERSION}/LLVM/bin/clang-tidy"
+
+# Default timeout is very short, increase to allow launching VSCode also when Lustre is slow
+sed -i -e 's/const timeoutInterval = 10000/const timeoutInterval = 120000/' "$PWD/lib/code-server/out/node/wrapper.js"
