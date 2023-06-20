@@ -6,6 +6,11 @@ cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 <% max_mem_per_cpu = SlurmLimits.limits.fetch(csc_slurm_partition, {}).fetch(:max_mem_per_cpu, 0).to_f %>
 <% mem = (max_mem_per_cpu * 1024 * csc_cores.to_i).to_i %>
 
+<% n_gpus = 1 %>
+<% gpu_type = SlurmLimits.limits&.fetch(csc_slurm_partition, nil)&.fetch(:gpu_types).first %>
+<% gres = [] %>
+<% gres.push("nvme:#{csc_nvme}") if csc_nvme.to_i > 0 %>
+<% gres.push("gpu:#{gpu_type}:#{n_gpus}") if gpu_type %>
 #
 # Configure the content of the job script for the batch job here
 # @see http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template
@@ -26,6 +31,6 @@ script:
       <% else %>
       - '--mem=<%= csc_memory -%>G'
       <% end %>
-      <% if csc_nvme.to_i > 0 %>
-      - '--gres=nvme:<%= csc_nvme.to_i -%>'
+      <% unless gres.empty? %>
+      - '--gres=<%= gres.join(",") -%>'
       <% end %>
