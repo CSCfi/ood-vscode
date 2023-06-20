@@ -9,24 +9,27 @@ cd "${HOME}"
 #
 # Start Jupyter Notebook Server
 #
+# Purge the module environment to avoid conflicts
 module purge
-module load git
+
 module load <%= context.compiler %>
-module load openmpi
 
 <%- unless context.modules.blank? -%>
-# Purge the module environment to avoid conflicts
-#module purge
-
 # Load the require modules
 module load <%= context.modules %>
 
-# List loaded modules
 <%- end -%>
 
-export _CXX_PATH=$(which $CXX)
+# List loaded modules
 module list
 
+export CC=cc
+export CXX=CC
+export FC=ftn
+export F77=ftn
+export F90=ftn
+
+export _CXX_PATH=$(which $CXX)
 # Benchmark info
 echo "TIMING - Starting Visual Studio Code at: $(date)"
 
@@ -47,12 +50,9 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
     "workbench.colorTheme": "Quiet Light",
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
-    "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"],
     "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
 }
 ' > $HOME/.local/share/csc-vscode/User/settings.json
-# setting compiler path to icpc breaks some parts
-# "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
 else
 
 sed -i 's/"python.pythonPath":\s*".*"/"python.pythonPath": "${env:_PYTHON_EXE}"/'  $HOME/.local/share/csc-vscode/User/settings.json

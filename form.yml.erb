@@ -36,7 +36,10 @@ attributes:
   compiler:
       widget: select
       options:
-          - "gcc/11.2.0"
+        - "PrgEnv-cray"
+        - "PrgEnv-amd"
+        - "PrgEnv-gnu"
+        - "PrgEnv-aocc"
   modules:
       help: | 
           Space separated list of modules to load, e.g
@@ -59,7 +62,7 @@ form:
   - csc_time
   - csc_header_settings
   - code_version
-  - compiler 
+  - compiler
   - modules
   - bc_email_on_started
   - csc_reset_cache
