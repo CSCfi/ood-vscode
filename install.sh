@@ -42,3 +42,6 @@ chmod +x "$EXT_DIR/ms-vscode.cpptools-${CPPTOOLS_VERSION}/LLVM/bin/clang-tidy"
 
 # Default timeout is very short, increase to allow launching VSCode also when Lustre is slow
 sed -i -e 's/const timeoutInterval = 10000/const timeoutInterval = 120000/' "$PWD/lib/code-server/out/node/wrapper.js"
+
+# Jupyter extension assumes writeable installation directory for Jupyter kernel temporary files
+sed -i 's/this.context.extensionUri,"temp"/this.platformService.homeDir,".cache","temp"/' "$PWD/lib/code-server/lib/vscode/extensions/ms-toolsai.jupyter-$JUPYTER_EXT_VER-universal/out/extension.node.js"
