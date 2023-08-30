@@ -18,7 +18,7 @@ rm code-server-${CODE_VERSION}-amd64.rpm
 
 JULIA_EXT_VER=1.38.2
 PYTHON_EXT_VER=2023.4.1
-JUPTER_EXT_VER=2023.3.100
+JUPYTER_EXT_VER=2023.3.100
 
 EXT_DIR="$PWD/lib/code-server/lib/vscode/extensions"
 ./bin/code-server --extensions-dir="$EXT_DIR" --user-data-dir="$PWD/temp_user_data" --verbose --install-extension ms-toolsai.jupyter@$JUPYTER_EXT_VER
