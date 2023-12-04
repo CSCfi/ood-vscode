@@ -29,3 +29,4 @@ script:
       <% if csc_nvme.to_i > 0 %>
       - '--gres=nvme:<%= csc_nvme.to_i -%>'
       <% end %>
+      - '--partition=<%= SlurmReservation.partition_to_use(csc_slurm_reservation, csc_slurm_partition) %>'
