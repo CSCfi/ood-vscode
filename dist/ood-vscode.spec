@@ -1,7 +1,7 @@
 %define app_path /www/ood/apps/sys/
 
 Name:           ood-vscode
-Version:        3
+Version:        4
 Release:        1%{?dist}
 Summary:        Open on Demand vscode
 
