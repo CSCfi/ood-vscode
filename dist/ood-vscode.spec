@@ -2,7 +2,7 @@
 
 Name:           ood-vscode
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Open on Demand vscode
 
 BuildArch:      noarch
