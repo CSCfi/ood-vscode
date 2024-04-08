@@ -1,8 +1,8 @@
 %define app_path /www/ood/apps/sys/
 
 Name:           ood-vscode
-Version:        1
-Release:        2%{?dist}
+Version:        2
+Release:        1%{?dist}
 Summary:        Open on Demand vscode
 
 BuildArch:      noarch
