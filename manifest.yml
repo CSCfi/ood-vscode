@@ -5,3 +5,5 @@ subcategory: Editors
 role: batch_connect
 description: |
   Interactive Visual Studio Code session
+metadata:
+  profiles: "all,default,industry"
