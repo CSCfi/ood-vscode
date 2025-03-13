@@ -25,10 +25,50 @@ attributes:
       widget: select
       options:
           - "gcc/11.2.0"
+  python_module:
+      widget: select
+      label: "Python Module"
+      options:
+        - ["None", "none", data-hide-full-python-module: true]
+        - "python-data"
+        - "geoconda"
+        - "pytorch"
+        - "tensorflow"
+  csc_module:
+    submit: full_python_module
+    label: "Python Module Version"
+    options:
+      - spider:
+          name: "python-data"
+          data:
+            - data-option-for-python-module-geoconda: false
+            - data-option-for-python-module-pytorch: false
+            - data-option-for-python-module-tensorflow: false
+      - spider:
+          name: "geoconda"
+          data:
+            - data-option-for-python-module-python-data: false
+            - data-option-for-python-module-pytorch: false
+            - data-option-for-python-module-tensorflow: false
+      - spider:
+          name: "pytorch"
+          data:
+            - data-option-for-python-module-python-data: false
+            - data-option-for-python-module-geoconda: false
+            - data-option-for-python-module-tensorflow: false
+      - spider:
+          name: "tensorflow"
+          data:
+            - data-option-for-python-module-python-data: false
+            - data-option-for-python-module-geoconda: false
+            - data-option-for-python-module-pytorch: false
+    help: |
+      Specify the version of the Python module you would like to use.
   modules:
-      help: | 
-          Space separated list of modules to load, e.g
-          openmpi geoconda
+    label: "Other Modules"
+    help: | 
+      Space separated list of modules to load, e.g.
+      openmpi geoconda
   csc_reset_cache:
     app: "sys/ood-vscode"
 
@@ -43,7 +83,9 @@ form:
   - csc_time
   - csc_header_settings
   - code_version
-  - compiler 
+  - compiler
+  - python_module
+  - csc_module
   - modules
   - bc_email_on_started
   - csc_reset_cache

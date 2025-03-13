@@ -14,6 +14,11 @@ module load git
 module load <%= context.compiler %>
 module load openmpi
 
+<%- if context.python_module != "none" %>
+  echo "Loading <%= context.full_python_module %> as python module"
+  module load "<%= context.full_python_module %>"
+<% end %>
+
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 #module purge
