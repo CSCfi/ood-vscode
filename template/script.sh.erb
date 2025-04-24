@@ -37,8 +37,9 @@ echo "TIMING - Starting Visual Studio Code at: $(date)"
 
 # Launch the VS code Server
 export _PYTHON_EXE=$(which python3)
-if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
-    mkdir -p $HOME/.local/share/csc-vscode/User/
+VSCODE_USER_CONFIG="$HOME/.local/share/csc-vscode/User/settings.json"
+if [[ ! -f "$VSCODE_USER_CONFIG" || ! -s "$VSCODE_USER_CONFIG" ]];then
+  mkdir -p "$(basename "$VSCODE_USER_CONFIG")"
     echo '
 {
     "workbench.editorAssociations": [
@@ -48,6 +49,7 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
         }
     ],
     "python.pythonPath": "${env:_PYTHON_EXE}",
+    "python.defaultInterpreterPath": "${env:_PYTHON_EXE}",
     "python.linting.enabled": true,
     "workbench.colorTheme": "Quiet Light",
     "extensions.autoUpdate": false,
@@ -55,14 +57,24 @@ if [[ ! -f $HOME/.local/share/csc-vscode/User/settings.json ]];then
     "C_Cpp.default.includePath": ["${env:CPATH}", "${env:_EXTRA_INCLUDES}"],
     "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
 }
-' > $HOME/.local/share/csc-vscode/User/settings.json
+' > "$VSCODE_USER_CONFIG"
 # setting compiler path to icpc breaks some parts
 # "C_Cpp.default.compilerPath": "${env:_CXX_PATH}"
 else
-
-sed -i 's/"python.pythonPath":\s*".*"/"python.pythonPath": "${env:_PYTHON_EXE}"/'  $HOME/.local/share/csc-vscode/User/settings.json
-
+  /usr/bin/jq '."python.pythonPath" = "${env:_PYTHON_EXE}" | ."python.defaultInterpreterPath" = "${env:_PYTHON_EXE}"' "$VSCODE_USER_CONFIG" > "$VSCODE_USER_CONFIG.tmp" && mv "$VSCODE_USER_CONFIG.tmp" "$VSCODE_USER_CONFIG"
 fi
+VSCODE_MACHINE_CONFIG="$HOME/.local/share/csc-vscode/Machine/settings.json"
+if [[ ! -f "$VSCODE_MACHINE_CONFIG" || ! -s "$VSCODE_MACHINE_CONFIG" ]];then
+  mkdir -p "$(basename "$VSCODE_MACHINE_CONFIG")"
+    echo '
+{
+    "python.defaultInterpreterPath": "${env:_PYTHON_EXE}",
+}
+' > "$VSCODE_MACHINE_CONFIG"
+else
+  /usr/bin/jq '."python.defaultInterpreterPath" = "${env:_PYTHON_EXE}"' "$VSCODE_MACHINE_CONFIG" > "$VSCODE_MACHINE_CONFIG.tmp" && mv "$VSCODE_MACHINE_CONFIG.tmp" "$VSCODE_MACHINE_CONFIG"
+fi
+
 
 export SING_FLAGS="$SING_FLAGS -B /appl/opt/ood/$SLURM_OOD_ENV:/appl/opt/ood/$SLURM_OOD_ENV"
 
