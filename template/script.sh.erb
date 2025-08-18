@@ -68,7 +68,7 @@ if [[ ! -f "$VSCODE_MACHINE_CONFIG" || ! -s "$VSCODE_MACHINE_CONFIG" ]];then
   mkdir -p "$(basename "$VSCODE_MACHINE_CONFIG")"
     echo '
 {
-    "python.defaultInterpreterPath": "${env:_PYTHON_EXE}",
+    "python.defaultInterpreterPath": "${env:_PYTHON_EXE}"
 }
 ' > "$VSCODE_MACHINE_CONFIG"
 else
